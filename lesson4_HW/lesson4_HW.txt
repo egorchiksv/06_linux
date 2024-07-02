@@ -1,0 +1,59 @@
+Создал папку для ДЗ:
+db@db-ubuntu22:~$ mkdir lesson4_HW
+
+Зашел в папку:
+db@db-ubuntu22:~$ cd lesson4_HW/
+
+Задания:
+1. Используя команду cat, создать два файла с данными, а затем объединить их. Просмотреть содержимое созданного файла. Переименовать файл, дав ему новое имя.
+- Создал 1 файл: db@db-ubuntu22:~/lesson4_HW$ cat > file_data1
+- Создал 2 файл: db@db-ubuntu22:~/lesson4_HW$ cat > file_data2
+- Объединяю файлы в один: db@db-ubuntu22:~/lesson4_HW$ cat file_data1 file_data2 > file_data1_2
+- Просматрел содержимое созданного файла из двух: db@db-ubuntu22:~/lesson4_HW$ cat file_data1_2
+- Переименовал созданный файл: db@db-ubuntu22:~/lesson4_HW$ mv file_data1_2 file_new
+
+2. Создать несколько файлов. Создать директорию, переместить файл туда. Удалить все созданные в этом и предыдущем задании директории и файлы.
+- Создал файла 1: db@db-ubuntu22:~/lesson4_HW$ touch f1
+- Создал файла 2: db@db-ubuntu22:~/lesson4_HW$ touch f2
+- Создал файла 3: db@db-ubuntu22:~/lesson4_HW$ touch f3
+- Создал директорию: db@db-ubuntu22:~/lesson4_HW$ mkdir folder
+- Переместил файл f1 в директорию folder: db@db-ubuntu22:~/lesson4_HW$ mv f1 /home/db/lesson4_HW/folder/
+- Переместил файл f2 в директорию folder: db@db-ubuntu22:~/lesson4_HW$ mv f2 /home/db/lesson4_HW/folder/
+- Переместил файл f3 в директорию folder: db@db-ubuntu22:~/lesson4_HW$ mv f3 /home/db/lesson4_HW/folder/
+- Удалил директорию folder целиком: db@db-ubuntu22:~/lesson4_HW$ rm -rf folder/
+- Удалил файл file_data1, file_data2, file_new: db@db-ubuntu22:~/lesson4_HW$ rm file_data1 file_data2 file_new
+
+
+3. Создать файл file1 и наполнить его произвольным содержимым. Скопировать его в file2. Создать символическую ссылку file3 на file1. Создать жесткую ссылку file4 на file1. Посмотреть, какие айноды у файлов. Удалить file1. Что стало с остальными созданными файлами? Попробовать вывести их на экран.
+- Создал file1: db@db-ubuntu22:~/lesson4_HW$ cat > file1
+- Скопировал file1 в file2: db@db-ubuntu22:~/lesson4_HW$ cp file1 file2
+- Создал символическую ссылку file3 на file1: db@db-ubuntu22:~/lesson4_HW$ ln -s file1 file3
+- Создал жесткую ссылку file4 на file1: db@db-ubuntu22:~/lesson4_HW$ ln file1 file4
+- Посмотрел айноды у файлов: db@db-ubuntu22:~/lesson4_HW$ ls -ali
+	565107 drwxrwxr-x  2 db db 4096 мар 14 21:24 .
+	571125 drwxr-x--- 15 db db 4096 мар 14 20:20 ..
+	524299 -rw-rw-r--  2 db db   46 мар 14 21:13 file1
+	524300 -rw-rw-r--  1 db db   46 мар 14 21:16 file2
+	524301 lrwxrwxrwx  1 db db    5 мар 14 21:23 file3 -> file1
+	524299 -rw-rw-r--  2 db db   46 мар 14 21:13 file4
+- Удалил file1: db@db-ubuntu22:~/lesson4_HW$ rm file1. 
+- Посмотрел айноды после удаления file1: db@db-ubuntu22:~/lesson4_HW$ ls -ali
+	565107 drwxrwxr-x  2 db db 4096 мар 14 21:26 .
+	571125 drwxr-x--- 15 db db 4096 мар 14 20:20 ..
+	524300 -rw-rw-r--  1 db db   46 мар 14 21:16 file2
+	524301 lrwxrwxrwx  1 db db    5 мар 14 21:23 file3 -> file1
+	524299 -rw-rw-r--  1 db db   46 мар 14 21:13 file4
+	Символическая ссылка перестала работать. Ссылка ссылается на удаленный файл file1. Жесткая ссылка удалилиась, но сам файл file4 остался целым.
+- Вывожу на экран содержимое файла file2: db@db-ubuntu22:~/lesson4_HW$ cat file2
+- Вывожу на экран содержимое файла file4: db@db-ubuntu22:~/lesson4_HW$ cat file4
+
+4. Дать созданным файлам другие, произвольные имена. Создать новую символическую ссылку. Переместить ссылки в другую директорию.
+- Переименовал файл file2: db@db-ubuntu22:~/lesson4_HW$ mv file2 file2_new
+- Переименовал файл file3: db@db-ubuntu22:~/lesson4_HW$ mv file3 file3_new
+- Переименовал файл file4: db@db-ubuntu22:~/lesson4_HW$ mv file4 file4_new
+- Создал новую символическую ссылку: db@db-ubuntu22:~/lesson4_HW$ ln -s file4_new file4_ln
+- Перемещаю ссылку на директорию выше: db@db-ubuntu22:~/lesson4_HW$ mv file4_ln ..
+	Ссылка перестает работать
+- Создал абсолютную символическую ссылку: db@db-ubuntu22:~/lesson4_HW$ ln -s /home/db/lesson4_HW/file2_new file2_ln
+- Перемещаю ссылку на директорию выше: db@db-ubuntu22:~/lesson4_HW$ mv file2_ln ..
+	Ссылка продолжает работать

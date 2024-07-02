@@ -1,0 +1,25 @@
+#!/bin/bash
+
+direct=$(ls -l | tr -s ' ' '\t' | cut -f '3' | sort -u)
+
+for i in $direct
+do
+        mkdir -p $i
+done
+
+directfile=$(ls -l | tr -s ' ' '\t' | cut -f '3 9')
+couter=0
+for i in directfile
+do
+        counter=$((counter + 1))
+        if ((counter%2))
+                then
+                        direct=$i
+                        echo $direct = $i zero
+                else
+                        if [ -f ./$i ]
+                                then
+                                        cp ./$i ./$direct/$i
+                        fi
+        fi
+done

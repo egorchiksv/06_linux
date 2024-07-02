@@ -1,0 +1,14 @@
+#!/bin/bash
+
+direct=$1
+
+if [ -d $dir ]
+        then
+                cd $dir
+                rm *.tmp
+                rm *.bak
+                rm *.backup
+        else
+                echo 'Нет такой директории'
+                exit 1
+fi
